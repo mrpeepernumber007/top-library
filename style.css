@@ -1,0 +1,79 @@
+@font-face {
+    font-family: 'norse';
+    src:
+        local('Norse'), 
+        url('https://cdn.statically.io/gh/TheOdinProject/theodinproject/efdc2888072f409e687d31dc580595dbe4fe0ff4/app/assets/fonts/Norse-Bold.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background: url(/assets/background-image.jpg);
+    background-position: right;
+    color: white;
+    font-family: 'norse';
+    box-sizing: border-box;
+}
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    font-size: 5rem;
+    margin: 15px 0px;
+}
+
+.library-cont {
+    /* display: grid;
+    grid-template-columns: repeat(auto-fit, clamp(350px, 2fr, 800px)); */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    border-radius: 10px;
+    margin: 20px;
+    padding: 30px;
+    background-color: rgba(38, 13, 13, .8);
+    background-color: rgba(0, 0, 0, .8);
+}
+
+.card {
+    background-color: rgb(94, 18, 18);
+    background-color: hsl(0, 49%, 15%);
+    min-width: 350px;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.card h2 {
+    text-align: center;
+}
+
+.book-read {
+    text-align: center;
+}
+
+.new-book-btn {
+    font-family: 'norse';
+    font-size: 2rem;
+    border-radius: 10px;
+    padding: 15px;
+    outline: none;
+    margin: 30px 0px;
+}
+
+.new-book-btn:hover {
+    background-color: black;
+    color: white;
+    outline: none;
+}
+
+.invisible {
+    visibility: hidden;
+}
