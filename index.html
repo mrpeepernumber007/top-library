@@ -7,19 +7,48 @@
     <title>Odin Library</title>
 </head>
 <body>
-    <div class="container">
-        <div class="title">Odin Library</div>
-        <div class="library-cont">
-            <div class="card">
-                <h2 class="book-title">Nuestra Parte de Noche</h2>
-                <p class="book-author">Mariana Enriquez</p>
-                <p class="book-genre">Terror</p>
-                <p class="book-pages"><span id="page-count">666</span> pages</p>
-                <p class="book-read">Read</p>
+    <div id="wrapper">
+        <aside class="form-container">
+            <form action="" method="submit" class="new-book-form">
+                <fieldset>
+                    <h2>Enter new book info:</h2>
+                    <ul>
+                        <li>
+                            <label for="book-title">Title:</label>
+                            <input type="text" id="book-title" name="title">
+                        </li>
+                        <li>
+                            <label for="book-author">Author:</label>
+                            <input type="text" id="book-author" name="author">
+                        </li>
+                        <li>
+                            <label for="book-genre">Genre:</label>
+                            <input type="text" id="book-genre" name="genre">
+                        </li>
+                        <li>
+                            <label for="book-pages">Number of pages:</label>
+                            <input type="text" id="book-pages" name="pages">
+                        </li>
+                    </ul>
+                </fieldset>
+            </form>
+            <button class="toggle-form" id="add-bone">Add Book 1</button>
+        </aside>
+        <div class="library-container">
+            <div class="title">Odin Library</div>
+            <div class="library">
+                <div class="card" data-key="book1">
+                    <h2 class="book-title">Nuestra Parte de Noche</h2>
+                    <p class="book-author">Mariana Enriquez</p>
+                    <p class="book-genre">Terror</p>
+                    <p class="book-pages"><span id="page-count">666</span> pages</p>
+                    <p class="book-read">Read</p>
+                    <div class="del-btn">X</div>
+                </div>
             </div>
-        </div>
-        <div class="add-book">
-            <button class="new-book-btn">New Book</button>
+            <div class="add-book">
+                <button class="new-book-btn">New Book</button>
+            </div>
         </div>
     </div>
     <script src="app.js"></script>
