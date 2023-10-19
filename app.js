@@ -72,11 +72,14 @@ const bookTwo = {
 }
 
 const addBone = document.getElementById('add-bone')
-odinLibrary.push(bookOne)
 odinLibrary.push(bookTwo)
+odinLibrary.forEach((book) => intoDom(book))
 
+
+//add form result as argument of iterateLib function in event listener
 addBone.addEventListener('click', iterateLib)
 
 function iterateLib () {
+    odinLibrary.push(bookOne)
     odinLibrary.forEach((book) => intoDom(book))
 }
