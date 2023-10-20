@@ -7,15 +7,17 @@ const newBookBtn = document.querySelector('.new-book-btn')
 formContainer.classList.add('invisible')
 const odinLibrary = []
 
-newBookBtn.addEventListener('click', toggleForm)
 
+//toggle new book form
 function toggleForm() {
     wrapper.classList.toggle('active-form')
     libContainer.classList.toggle('library-area')
     formContainer.classList.toggle('form-area')
     formContainer.classList.toggle('invisible')
 }
+newBookBtn.addEventListener('click', toggleForm)
 
+//add book object to DOM
 function intoDom(bookObj) {
     const bookCard = document.createElement('div')
     bookCard.classList.add('card')
@@ -57,29 +59,42 @@ function intoDom(bookObj) {
     library.appendChild(bookCard)
 }
 
-//test with library
-const bookOne = {
-    title: 'Nuestra parte de noche',
-    author: 'Mariana Enriquez',
-    genre: 'Terror',
-    pages: 666,
+//book object constructor
+function Book(title, author, genre, pages) {
+    this.title = title;
+    this.author = author;
+    this.genre = genre;
+    this.pages = pages;
 }
-const bookTwo = {
-    title: 'Pepe grillo',
-    author: 'Pepina Grilla',
-    genre: 'Drama',
-    pages: '300',
+
+
+//grab and use form
+const formTitle = document.getElementById('form-title')
+const formAuthor = document.getElementById('form-author')
+const formGenre = document.getElementById('form-genre')
+const formPages = document.getElementById('form-pages')
+
+function useForm() {
+    const givenTitle = formTitle.value
+    const givenAuthor = formAuthor.value
+    const givenGenre = formGenre.value
+    const givenPages = formPages.value
+
+    const newBook = new Book(givenTitle, givenAuthor, givenGenre, givenPages)
+    intoDom(newBook)
 }
 
 const addBone = document.getElementById('add-bone')
-odinLibrary.push(bookTwo)
-odinLibrary.forEach((book) => intoDom(book))
+addBone.addEventListener('click', useForm)
+
+// odinLibrary.push(bookTwo)
+// odinLibrary.forEach((book) => intoDom(book))
 
 
-//add form result as argument of iterateLib function in event listener
-addBone.addEventListener('click', iterateLib)
+// //add form result as argument of iterateLib function in event listener
+// addBone.addEventListener('click', iterateLib)
 
-function iterateLib () {
-    odinLibrary.push(bookOne)
-    odinLibrary.forEach((book) => intoDom(book))
-}
+// function iterateLib () {
+    //     odinLibrary.push(bookOne)
+    //     odinLibrary.forEach((book) => intoDom(book))
+    // }
