@@ -5,6 +5,7 @@ const libContainer = document.querySelector('.library-container')
 const newBookBtn = document.querySelector('.new-book-btn')
 
 formContainer.classList.add('invisible')
+library.classList.add('invisible')
 const odinLibrary = []
 
 
@@ -54,8 +55,6 @@ function intoDom(bookObj) {
     bookCard.appendChild(read)
     bookCard.appendChild(delBtn)
 
-
-    // odinLibrary.push(bookOne)
     library.appendChild(bookCard)
 }
 
@@ -67,6 +66,10 @@ function Book(title, author, genre, pages) {
     this.pages = pages;
 }
 
+//add to library
+function addToLibrary(bookObj) {
+    odinLibrary.push(bookObj)
+}
 
 //grab and use form
 const formTitle = document.getElementById('form-title')
@@ -75,26 +78,49 @@ const formGenre = document.getElementById('form-genre')
 const formPages = document.getElementById('form-pages')
 
 function useForm() {
+    library.classList.remove('invisible')
     const givenTitle = formTitle.value
     const givenAuthor = formAuthor.value
     const givenGenre = formGenre.value
     const givenPages = formPages.value
 
     const newBook = new Book(givenTitle, givenAuthor, givenGenre, givenPages)
+    addToLibrary(newBook)
     intoDom(newBook)
 }
 
 const addBone = document.getElementById('add-bone')
 addBone.addEventListener('click', useForm)
 
-// odinLibrary.push(bookTwo)
-// odinLibrary.forEach((book) => intoDom(book))
 
 
-// //add form result as argument of iterateLib function in event listener
-// addBone.addEventListener('click', iterateLib)
-
+//iterate over library, modify as needed when storage is added
 // function iterateLib () {
-    //     odinLibrary.push(bookOne)
-    //     odinLibrary.forEach((book) => intoDom(book))
-    // }
+//     odinLibrary.push(bookOne)
+//     odinLibrary.push(bookTwo)
+//     odinLibrary.push(bookThree)
+//     odinLibrary.forEach((book) => intoDom(book))
+// }
+// iterateLib()
+
+//book examples
+// const bookOne = {
+//     title: 'Pepe Grillo',
+//     author: 'Yuya',
+//     genre: 'Terror psicologico',
+//     pages: '666',
+// }
+
+// const bookTwo = {
+//     title: 'El hombre cara de verga',
+//     author: 'Bergoglio Penitez',
+//     genre: 'Novela Romantica',
+//     pages: '69',
+// }
+
+// const bookThree = {
+//     title: 'Alfajoria: una historia de hambre',
+//     author: 'Desconocido',
+//     genre: 'Fantasia',
+//     pages: '3000',
+// }
