@@ -8,7 +8,7 @@
 </head>
 <body>
     <div id="wrapper">
-        <aside class="form-container">
+        <aside class="form-container invisible">
             <form action="" method="submit" class="new-book-form">
                 <fieldset>
                     <h2>Enter new book info:</h2>
@@ -36,9 +36,10 @@
         </aside>
         <div class="library-container">
             <div class="title">Odin Library</div>
-            <div class="library"></div>
+            <div class="library invisible"></div>
             <div class="add-book">
-                <button class="new-book-btn">New Book</button>
+                <button class="new-book-btn" id="toggle-form-btn">New Book</button>
+                <button class="new-book-btn" id="update-lib-btn">Update Library</button>
             </div>
         </div>
     </div>
