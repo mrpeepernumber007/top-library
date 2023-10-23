@@ -2,15 +2,21 @@ const library = document.querySelector('.library')
 const wrapper = document.getElementById('wrapper')
 const formContainer = document.querySelector('.form-container')
 const libContainer = document.querySelector('.library-container')
-const newBookBtn = document.querySelector('.new-book-btn')
-
-formContainer.classList.add('invisible')
-library.classList.add('invisible')
+const newBookBtn = document.getElementById('toggle-form-btn')
+const updateLibBtn = document.getElementById('update-lib-btn')
 const odinLibrary = []
 
+function toggleBtnText() {
+    if ((formContainer.classList.contains('invisible'))) {
+        newBookBtn.textContent = 'Close form'
+    } else {
+        newBookBtn.textContent = 'New Book'
+    }
+}
 
 //toggle new book form
 function toggleForm() {
+    toggleBtnText()
     wrapper.classList.toggle('active-form')
     libContainer.classList.toggle('library-area')
     formContainer.classList.toggle('form-area')
@@ -55,6 +61,8 @@ function intoDom(bookObj) {
     bookCard.appendChild(read)
     bookCard.appendChild(delBtn)
 
+    library.classList.remove('invisible')
+    libContainer.style.overflowY = 'scroll'
     library.appendChild(bookCard)
 }
 
@@ -78,7 +86,7 @@ const formGenre = document.getElementById('form-genre')
 const formPages = document.getElementById('form-pages')
 
 function useForm() {
-    library.classList.remove('invisible')
+    
     const givenTitle = formTitle.value
     const givenAuthor = formAuthor.value
     const givenGenre = formGenre.value
@@ -92,35 +100,45 @@ function useForm() {
 const addBone = document.getElementById('add-bone')
 addBone.addEventListener('click', useForm)
 
-
-
 //iterate over library, modify as needed when storage is added
-// function iterateLib () {
-//     odinLibrary.push(bookOne)
-//     odinLibrary.push(bookTwo)
-//     odinLibrary.push(bookThree)
-//     odinLibrary.forEach((book) => intoDom(book))
-// }
-// iterateLib()
+const bookOne = {
+    title: 'Pepe Grillo',
+    author: 'Yuya',
+    genre: 'Terror psicologico',
+    pages: '666',
+}
 
-//book examples
-// const bookOne = {
-//     title: 'Pepe Grillo',
-//     author: 'Yuya',
-//     genre: 'Terror psicologico',
-//     pages: '666',
-// }
+const bookTwo = {
+    title: 'El hombre cara de verga',
+    author: 'Bergoglio Penitez',
+    genre: 'Novela Romantica',
+    pages: '69',
+}
 
-// const bookTwo = {
-//     title: 'El hombre cara de verga',
-//     author: 'Bergoglio Penitez',
-//     genre: 'Novela Romantica',
-//     pages: '69',
-// }
+const bookThree = {
+    title: 'Alfajoria: una historia de hambre',
+    author: 'Desconocido',
+    genre: 'Fantasia',
+    pages: '3000',
+}
 
-// const bookThree = {
-//     title: 'Alfajoria: una historia de hambre',
-//     author: 'Desconocido',
-//     genre: 'Fantasia',
-//     pages: '3000',
-// }
+odinLibrary.push(bookOne)
+odinLibrary.push(bookTwo)
+odinLibrary.push(bookThree)
+
+//update library
+updateLibBtn.addEventListener('click', iterateLib)
+
+function iterateLib () {
+    const titles = document.querySelectorAll('.book-title')
+    odinLibrary.forEach((book) => {
+        let duplicate = false
+        titles.forEach((title) => {
+            console.log(book.title);
+            if(book.title === title.textContent) {
+                duplicate = true
+            }
+        })
+        if (!duplicate) {intoDom(book)}
+    })
+}
