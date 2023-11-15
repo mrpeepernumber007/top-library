@@ -6,14 +6,6 @@ const newBookBtn = document.getElementById('toggle-form-btn')
 const updateLibBtn = document.getElementById('update-lib-btn')
 const odinLibrary = []
 
-function toggleBtnText() {
-    if ((formContainer.classList.contains('invisible'))) {
-        newBookBtn.textContent = 'Close form'
-    } else {
-        newBookBtn.textContent = 'New Book'
-    }
-}
-
 //toggle new book form
 function toggleForm() {
     toggleBtnText()
@@ -22,6 +14,15 @@ function toggleForm() {
     formContainer.classList.toggle('form-area')
     formContainer.classList.toggle('invisible')
 }
+
+function toggleBtnText() {
+    if ((formContainer.classList.contains('invisible'))) {
+        newBookBtn.textContent = 'Close form'
+    } else {
+        newBookBtn.textContent = 'New Book'
+    }
+}
+
 newBookBtn.addEventListener('click', toggleForm)
 
 //add book object to DOM
@@ -51,7 +52,7 @@ function intoDom(bookObj) {
     author.textContent = bookObj.author
     genre.textContent = bookObj.genre
     pages.textContent = bookObj.pages
-    read.textContent = 'read'
+    read.textContent = readValue(bookObj)
     delBtn.textContent = 'X'
 
     bookCard.appendChild(title)
@@ -61,44 +62,47 @@ function intoDom(bookObj) {
     bookCard.appendChild(read)
     bookCard.appendChild(delBtn)
 
+    read.addEventListener('click', setRead)
+    delBtn.addEventListener('click', deleteBook)
+
+
     library.classList.remove('invisible')
     libContainer.style.overflowY = 'scroll'
     library.appendChild(bookCard)
 }
 
 //book object constructor
-function Book(title, author, genre, pages) {
+function Book(title, author, genre, pages, read) {
     this.title = title;
     this.author = author;
     this.genre = genre;
     this.pages = pages;
+    this.read = read;
 }
+
+
 
 //add to library
-function addToLibrary(bookObj) {
-    odinLibrary.push(bookObj)
-}
-
-//grab and use form
 const formTitle = document.getElementById('form-title')
 const formAuthor = document.getElementById('form-author')
 const formGenre = document.getElementById('form-genre')
 const formPages = document.getElementById('form-pages')
 
-function useForm() {
-    
+function addToLibrary() {
+    const formRead = document.getElementById('read-unread').checked
     const givenTitle = formTitle.value
     const givenAuthor = formAuthor.value
     const givenGenre = formGenre.value
     const givenPages = formPages.value
+    const givenRead = formRead
 
-    const newBook = new Book(givenTitle, givenAuthor, givenGenre, givenPages)
-    addToLibrary(newBook)
-    intoDom(newBook)
+    const newBook = new Book(givenTitle, givenAuthor, givenGenre, givenPages, givenRead)
+    odinLibrary.push(newBook)
+    // intoDom(newBook)
 }
 
 const addBone = document.getElementById('add-bone')
-addBone.addEventListener('click', useForm)
+addBone.addEventListener('click', addToLibrary)
 
 //iterate over library, modify as needed when storage is added
 const bookOne = {
@@ -106,6 +110,7 @@ const bookOne = {
     author: 'Yuya',
     genre: 'Terror psicologico',
     pages: '666',
+    read: true,
 }
 
 const bookTwo = {
@@ -113,6 +118,7 @@ const bookTwo = {
     author: 'Bergoglio Penitez',
     genre: 'Novela Romantica',
     pages: '69',
+    read: false,
 }
 
 const bookThree = {
@@ -120,6 +126,7 @@ const bookThree = {
     author: 'Desconocido',
     genre: 'Fantasia',
     pages: '3000',
+    read: true,
 }
 
 odinLibrary.push(bookOne)
@@ -140,5 +147,49 @@ function iterateLib () {
             }
         })
         if (!duplicate) {intoDom(book)}
+    })
+    // const readUnread = document.querySelectorAll('.book-read')
+    // readUnread.forEach((state) => {
+    //     state.addEventListener('click' , (e) => {
+    //         readValue()
+    //     })
+    // })
+}
+
+//toggle read
+function readValue (book) {
+    if (book.read === true) {
+        return 'read'
+    } else {
+        return 'unread'
+    }
+}
+
+Book.prototype.toggleRead = function() {
+    if(this.read === true) {
+        this.read = false
+    } else {this.read = true}
+}
+
+function switchRead(status) {
+    if (status === 'read') {
+        return 'unread'
+    } else if (status === 'unread') {
+        return 'read'
+    }
+}
+
+function setRead() {
+    const readBtn = document.querySelectorAll('.book-read')
+    readBtn.forEach((read) => {
+        read.addEventListener('click', (e) => {
+            const selectTitle = e.target.parentElement.firstChild.textContent
+            odinLibrary.forEach((book) => {
+                if(book.title === selectTitle) {
+                    book.read = !book.read
+                    e.target.textContent = switchRead(e.target.textContent)
+                }
+            })
+        })
     })
 }
