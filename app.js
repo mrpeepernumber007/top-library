@@ -67,11 +67,20 @@ function intoDom(bookObj) {
 }
 
 //book object constructor
-function Book(title, author, genre, pages) {
-    this.title = title;
-    this.author = author;
-    this.genre = genre;
-    this.pages = pages;
+// function Book(title, author, genre, pages) {
+//     this.title = title;
+//     this.author = author;
+//     this.genre = genre;
+//     this.pages = pages;
+// }
+
+class Book {
+    constructor(title, author, genre, pages) {
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
+        this.pages = pages;
+    }
 }
 
 //add to library
