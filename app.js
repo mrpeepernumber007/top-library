@@ -156,23 +156,17 @@ function iterateLib () {
 
 //toggle read
 function readValue (book) {
-    if (book.read === true) {
+    if (book.read) {
         return 'read'
     } else {
         return 'unread'
     }
 }
 
-Book.prototype.toggleRead = function() {
-    if(this.read === true) {
-        this.read = false
-    } else {this.read = true}
-}
-
 function switchRead(status) {
     if (status === 'read') {
         return 'unread'
-    } else if (status === 'unread') {
+    } else {
         return 'read'
     }
 }
