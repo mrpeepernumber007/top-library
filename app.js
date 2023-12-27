@@ -63,7 +63,7 @@ function intoDom(bookObj) {
     bookCard.appendChild(delBtn)
 
     read.addEventListener('click', setRead)
-    // delBtn.addEventListener('click', deleteBook)
+    delBtn.addEventListener('click', deleteBook)
 
 
     library.classList.remove('invisible')
@@ -98,8 +98,8 @@ function addToLibrary() {
 
     const newBook = new Book(givenTitle, givenAuthor, givenGenre, givenPages, givenRead)
     odinLibrary.push(newBook)
-    intoDom(newBook)
-}
+    // intoDom(newBook)
+}   
 
 const addBone = document.getElementById('add-bone')
 addBone.addEventListener('click', addToLibrary)
