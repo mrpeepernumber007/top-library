@@ -63,7 +63,7 @@ function intoDom(bookObj) {
     bookCard.appendChild(delBtn)
 
     read.addEventListener('click', setRead)
-    delBtn.addEventListener('click', deleteBook)
+    // delBtn.addEventListener('click', deleteBook)
 
 
     library.classList.remove('invisible')
