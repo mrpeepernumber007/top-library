@@ -51,7 +51,7 @@ function intoDom(bookObj) {
     title.textContent = bookObj.title
     author.textContent = bookObj.author
     genre.textContent = bookObj.genre
-    pages.textContent = bookObj.pages
+    pages.textContent = `${bookObj.pages} pages`
     read.textContent = readValue(bookObj)
     delBtn.textContent = 'X'
 
@@ -63,8 +63,9 @@ function intoDom(bookObj) {
     bookCard.appendChild(delBtn)
 
     read.addEventListener('click', setRead)
-    // delBtn.addEventListener('click', deleteBook)
-
+    delBtn.addEventListener('click', () => {
+        deleteBook(bookCard, title.innerHTML)
+    })
 
     library.classList.remove('invisible')
     libContainer.style.overflowY = 'scroll'
@@ -95,14 +96,18 @@ function addToLibrary() {
     const givenGenre = formGenre.value
     const givenPages = formPages.value
     const givenRead = formRead
+    document.getElementById('book-form').reset()
 
     const newBook = new Book(givenTitle, givenAuthor, givenGenre, givenPages, givenRead)
     odinLibrary.push(newBook)
     intoDom(newBook)
 }
 
-const addBone = document.getElementById('add-bone')
-addBone.addEventListener('click', addToLibrary)
+const bookForm = document.getElementById('book-form')
+bookForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    addToLibrary()
+})
 
 //iterate over library, modify as needed when storage is added
 const bookOne = {
@@ -141,19 +146,12 @@ function iterateLib () {
     odinLibrary.forEach((book) => {
         let duplicate = false
         titles.forEach((title) => {
-            console.log(book.title);
             if(book.title === title.textContent) {
                 duplicate = true
             }
         })
         if (!duplicate) {intoDom(book)}
     })
-    // const readUnread = document.querySelectorAll('.book-read')
-    // readUnread.forEach((state) => {
-    //     state.addEventListener('click' , (e) => {
-    //         readValue()
-    //     })
-    // })
 }
 
 //toggle read
@@ -192,4 +190,13 @@ function setRead() {
             })
         })
     })
+}
+
+function deleteBook(bookDOM, bookTitle) {
+    bookDOM.remove()
+    for (let b = 0; b < odinLibrary.length; b++) {
+        if (odinLibrary[b].title === bookTitle) {
+            odinLibrary.splice(b, 1)
+        }
+    }
 }

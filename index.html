@@ -9,25 +9,25 @@
 <body>
     <div id="wrapper">
         <aside class="form-container invisible">
-            <form action="" method="submit" class="new-book-form">
+            <form id="book-form" action="#" method="submit" class="new-book-form">
                 <fieldset>
                     <h2>Enter new book info:</h2>
                     <ul>
                         <li>
                             <label for="form-title">Title:</label>
-                            <input type="text" id="form-title" name="title">
+                            <input type="text" id="form-title" name="title" required>
                         </li>
                         <li>
                             <label for="form-author">Author:</label>
-                            <input type="text" id="form-author" name="author">
+                            <input type="text" id="form-author" name="author" required>
                         </li>
                         <li>
                             <label for="form-genre">Genre:</label>
-                            <input type="text" id="form-genre" name="genre">
+                            <input type="text" id="form-genre" name="genre" required>
                         </li>
                         <li>
                             <label for="form-pages">Number of pages:</label>
-                            <input type="text" id="form-pages" name="pages">
+                            <input type="number" id="form-pages" name="pages" required>
                         </li>
                         <li>
                             <label for="read-unread">Have you read it?</label>
@@ -35,8 +35,8 @@
                         </li>
                     </ul>
                 </fieldset>
+                <button type="submit" class="toggle-form" id="add-bone">Add New Book</button>
             </form>
-            <button class="toggle-form" id="add-bone">Add New Book</button>
         </aside>
         <div class="library-container">
             <div class="title">Odin Library</div>
